@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\GLI">
+      <UniqueIdentifier>{4dc606c0-861d-48fa-ad61-8cb9576f4640}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainApp.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cMyRandom.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cMyWindow.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cEventHandler.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GLI\cGLSLprogram.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GLI\cVertexBufferObject.h">
+      <Filter>Source Files\GLI</Filter>
+    </ClInclude>
+    <ClInclude Include="GLI\cOpenGLInterface.h">
+      <Filter>Source Files\GLI</Filter>
+    </ClInclude>
+    <ClInclude Include="GLI\cVertexArrayObject.h">
+      <Filter>Source Files\GLI</Filter>
+    </ClInclude>
+    <ClInclude Include="GLI\cFrameBuffer.h">
+      <Filter>Source Files\GLI</Filter>
+    </ClInclude>
+    <ClInclude Include="cMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cOBJ_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cBaseEngineObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imaginarium01.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cMainApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cMyRandom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cMyWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cEventHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLI\cGLSLprogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLI\cOpenGLInterface.cpp">
+      <Filter>Source Files\GLI</Filter>
+    </ClCompile>
+    <ClCompile Include="GLI\cVertexArrayObject.cpp">
+      <Filter>Source Files\GLI</Filter>
+    </ClCompile>
+    <ClCompile Include="GLI\cVertexBufferObject.cpp">
+      <Filter>Source Files\GLI</Filter>
+    </ClCompile>
+    <ClCompile Include="GLI\cFrameBuffer.cpp">
+      <Filter>Source Files\GLI</Filter>
+    </ClCompile>
+    <ClCompile Include="cMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cOBJ_loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cBaseEngineObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
