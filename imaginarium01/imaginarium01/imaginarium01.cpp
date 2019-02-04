@@ -28,11 +28,6 @@
 
 
 
-cTestClass1 InTC1_1, InTC1_2;
-cTestClass2 InTC2_1, InTC2_2;
-
-
-
 
 
 void nsGLI::cOpenGL_Interface::RenderFrame(void)
@@ -66,10 +61,7 @@ int SDL_main(int argc, char *argv[])
 
 	LARGE_INTEGER StartingTime, EndingTime, ElapsedMicroseconds;
 
-	std::cout << " test class 1, instance 1 id:" << InTC1_1.GetID() << std::endl;
-	std::cout << " test class 1, instance 2 id:" << InTC1_2.GetID() << std::endl;
-	std::cout << " test class 2, instance 1 id:" << InTC2_1.GetID() << std::endl;
-	std::cout << " test class 2, instance 2 id:" << InTC2_2.GetID() << std::endl;
+
 
 
 

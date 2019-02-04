@@ -1,0 +1,3 @@
+﻿  CppParser01.cpp
+CppParser01.obj : error LNK2001: unresolved external symbol "unsigned char nsAAA::nsBBB::x" (?x@nsBBB@nsAAA@@3EA)
+C:\development\Playgroung01\CppParser01\Debug\CppParser01.exe : fatal error LNK1120: 1 unresolved externals

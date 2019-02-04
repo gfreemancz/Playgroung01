@@ -1,0 +1,38 @@
+#! /bin/sh
+# /etc/init.d/skynet_start
+#
+
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.2-14) to ensure that this file is present
+# and status_of_proc is working.
+. /lib/lsb/init-functions
+
+
+
+# Some things that run always
+#touch /var/lock/skynet_start
+
+
+/home/pi/skynet_2.0/skynet_2.0 start
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    echo "Starting script skynet_start "
+    echo "Could do more here"
+    ;;
+  stop)
+    echo "Stopping script skynet_start"
+    echo "Could do more here"
+    ;;
+  *)
+    echo "Usage: /etc/init.d/skynet_start {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
