@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\development\dev_libs\glew-2.0.0\include\GL;C:\development\Playgroung01\imaginarium01\imaginarium01\graphic;C:\development\Playgroung01\imaginarium01\imaginarium01\GLI;C:\development\Playgroung01\imaginarium01\imaginarium01;C:\development\dev_libs\SDL2_image\include;C:\development\dev_libs\SDL2_mixer\include;C:\development\dev_libs\SDL2\include;C:\development\glm-0.9.9.0\glm;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)\graphic;$(ProjectDir)\GLI;C:\development\dev_libs\glew-2.0.0\include\GL;C:\development\dev_libs\SDL2_image\include;C:\development\dev_libs\SDL2_mixer\include;C:\development\dev_libs\SDL2\include;C:\development\glm-0.9.9.0;$(IncludePath)</IncludePath>
     <LibraryPath>C:\development\DLLs_x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
