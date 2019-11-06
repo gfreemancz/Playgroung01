@@ -18,6 +18,8 @@
   #include <glew.h>
 #endif
 
+#include "cGL_Texture.h"
+
 namespace nsGLI {
 
 enum eFBOAttachementType
@@ -37,12 +39,18 @@ class cFrameBuffer
   std::vector<sFBOAtta> ColorAttachements;
   GLuint  DepthAttachement;
   GLuint  StencilAttachement;
-
+  ui32    Width;
+  ui32    Height;
 public:
   cFrameBuffer();
+  cFrameBuffer(ui32 arg_Width, ui32 arg_Height);
   ~cFrameBuffer();
+  void InitFBO(void);
   void BindFBO(void);
-  ui8 AddColorAttachement(eFBOAttachementType arg_Type,ui32 arg_Width,ui32 arg_Height);
+  void UnBindFBO(void);
+  ui8 AddColorAttachement(cGL_Texture &arg_Texture);
+  ui16 CheckFBStatus(void);
+  
 };
 
 } /* namespace nsGLI */

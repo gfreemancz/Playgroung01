@@ -26,6 +26,12 @@
 
 #include "cBaseEngineObject.h"
 
+#include "cShader.h"
+#include "cShaderProgram.h"
+
+#include "cTimeMeasure.h"
+
+#include "cMainApp.h"
 
 
 
@@ -51,18 +57,21 @@ public:
 
 bool g_AppRunning = true;
 
+
+cTimeMeasure G_LoopTime;
+cTimeMeasure G_SwapTime;
+
 cMesh g_testMesh;
 
-int SDL_main(int argc, char *argv[])
+cShader testShader_V(std::string("../Shaders/VertexShader01.glsl"), GL_VERTEX_SHADER);
+cShader testShader_F(std::string("../Shaders/FragmentShader01.glsl"),GL_FRAGMENT_SHADER);
+cShaderProgram testShaderProgram;
+
+int main(int argc, char *argv[])
 {
 	cEventHandler loc_EventHandler;
 	bool loc_AppRunning = true;
 	cMyWindow * loc_Wokynko = nullptr;
-
-	LARGE_INTEGER StartingTime, EndingTime, ElapsedMicroseconds;
-
-
-
 
 
 
@@ -83,31 +92,42 @@ int SDL_main(int argc, char *argv[])
 		}
 	}
 
-  g_testMesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\3d-model.obj");
-		
+
+  testShader_V.InitShader();
+  testShader_F.InitShader();
+
+  testShaderProgram.InitShaderProgram(&testShader_V, &testShader_F);
+
+
+  cMainApp::Init();
+
+
+
+ // g_testMesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\3d-model.obj");
+  std::cout << "Starting Main Loop" << std::endl;
 	
-	ui32 loc_cnt = 0;
+	ui32 loc_cnt = 0U;
 	while (g_AppRunning)
 	{
     
-		QueryPerformanceCounter(&StartingTime);
+    G_LoopTime.Begin();
 
 		loc_EventHandler.cyclic();
 		nsGLI::iGlInterface.RenderFrame();
+    G_LoopTime.End();
 
+    G_SwapTime.Begin();
 		SDL_GL_SwapWindow(loc_Wokynko->getWinPtr());
-		QueryPerformanceCounter(&EndingTime);
-		ElapsedMicroseconds.QuadPart = EndingTime.QuadPart - StartingTime.QuadPart;
+    G_SwapTime.End();
     
-		if (loc_cnt < 100)
-		{
+		if (loc_cnt < 100U)
+	  {
 			loc_cnt++;
-
 		}
 		else
 		{
-			loc_cnt = 0;
-			std::cout << ElapsedMicroseconds.QuadPart << std::endl;
+			loc_cnt = 0U;
+			std::cout << G_LoopTime.Get_mSec() << std::endl;
 		}
 	}
 

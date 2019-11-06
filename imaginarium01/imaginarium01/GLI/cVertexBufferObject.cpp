@@ -12,15 +12,34 @@
 
 namespace nsGLI {
 
-cVertexBufferObject::cVertexBufferObject()
+cVertexBufferObject::cVertexBufferObject():
+  Data(),
+  VBO_id(-1),
+  VBOusage(0)
 {
   // TODO Auto-generated constructor stub
 
 }
 
+cVertexBufferObject::cVertexBufferObject(ui16 arg_usage):
+  Data(),
+  VBO_id(-1),
+  VBOusage(arg_usage)
+{
+}
+
 cVertexBufferObject::~cVertexBufferObject()
 {
-  if(Data.size()>0) delete &Data;
+  //if not empty, delete data in RAM
+  if (Data.size() > 0)
+  {
+    delete &Data;
+  }
+  //if needed, delete VBO in GPU
+  if (VBO_id != -1)
+  {
+    glDeleteBuffers(1, &VBO_id);
+  }
 }
 
 void cVertexBufferObject::AddVertex(glm::vec3 arg_Pos, glm::vec3 arg_Normal, glm::vec2 arg_UV)
@@ -34,6 +53,7 @@ void cVertexBufferObject::AddVertex(glm::vec3 arg_Pos, glm::vec3 arg_Normal, glm
 
 void cVertexBufferObject::Clean(void)
 {
+  glDeleteBuffers(1,&VBO_id);
   Data.clear();
 }
 

@@ -12,11 +12,31 @@
 #include "stdafx.h"
 #endif
 
+//#define GLEW_STATIC
+#include <glew.h>
+#include <GL\GL.h>
+#include <GL\GLU.h>
+
 namespace nsGLI {
 
 class cVertexArrayObject
 {
+  GLuint VAO_id;
 public:
+
+  //create VAO in GPU
+  void CreateVAO(void)
+  {
+    glGenVertexArrays(1, &VAO_id);
+  }
+
+  //activate VAO in GPU
+  void BindVAO(void)
+  {
+    glBindVertexArray(VAO_id);
+  }
+
+
   cVertexArrayObject();
   ~cVertexArrayObject();
 };

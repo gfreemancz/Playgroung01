@@ -11,7 +11,7 @@
 #include <string>
 #include <map>
 
-#define GLEW_STATIC
+//#define GLEW_STATIC
 #include <glew.h>
 #include <GL\GL.h>
 #include <GL\GLU.h>

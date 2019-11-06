@@ -6,8 +6,9 @@
 #define STDAFX_H
 
 
-#include <stdio.h>
+//#include <stdio.h>
 #include <tchar.h>
+#include <iostream>
 
 #ifndef CCOMMANDBASE_H_
 #include "cCommandBase.h"
