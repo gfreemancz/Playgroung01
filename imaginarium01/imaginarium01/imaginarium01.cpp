@@ -33,7 +33,7 @@
 
 #include "cMainApp.h"
 
-
+#include "cQuaternion.h"
 
 
 void nsGLI::cOpenGL_Interface::RenderFrame(void)
@@ -43,29 +43,19 @@ void nsGLI::cOpenGL_Interface::RenderFrame(void)
 	glLoadIdentity();
 }
 
-class cQuitAppCommand : public cCommandBase
-{
-public:
-	~cQuitAppCommand() {};
-	void execute(void * arg_argument)
-	{
-		(void)arg_argument;
-		extern bool g_AppRunning;
-		g_AppRunning = false;
-	}
-};
 
 bool g_AppRunning = true;
 
 
 cTimeMeasure G_LoopTime;
 cTimeMeasure G_SwapTime;
+cTimeMeasure G_QuatTime;
 
-cMesh g_testMesh;
+cMeshT g_testMesh;
 
-cShader testShader_V(std::string("../Shaders/VertexShader01.glsl"), GL_VERTEX_SHADER);
-cShader testShader_F(std::string("../Shaders/FragmentShader01.glsl"),GL_FRAGMENT_SHADER);
-cShaderProgram testShaderProgram;
+
+void RegisterEventsToHandler(cEventHandler* arg_EventHandler);
+
 
 int main(int argc, char *argv[])
 {
@@ -73,11 +63,12 @@ int main(int argc, char *argv[])
 	bool loc_AppRunning = true;
 	cMyWindow * loc_Wokynko = nullptr;
 
-
+  si32 loc_WinPosX = 255, loc_WinPosY = 512;
 
   std::cout << "hello world" << std::endl;
+  
 
-	loc_EventHandler.RegisterEvent(static_cast<ui32>(SDL_QUIT), new cQuitAppCommand());
+  RegisterEventsToHandler(&loc_EventHandler);
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -92,42 +83,57 @@ int main(int argc, char *argv[])
 		}
 	}
 
+ 
+  
 
-  testShader_V.InitShader();
-  testShader_F.InitShader();
+   
 
-  testShaderProgram.InitShaderProgram(&testShader_V, &testShader_F);
+   cMainApp::Init();
+  
 
-
-  cMainApp::Init();
-
-
-
- // g_testMesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\3d-model.obj");
+   std::cout << "init time: " << std::dec << cMainApp::InitTime.Get_uSec() << std::endl;
+//  g_testMesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\Airplane.obj");
   std::cout << "Starting Main Loop" << std::endl;
 	
 	ui32 loc_cnt = 0U;
 	while (g_AppRunning)
 	{
-    
+
     G_LoopTime.Begin();
 
+    
+
 		loc_EventHandler.cyclic();
-		nsGLI::iGlInterface.RenderFrame();
+    cMainApp::RunLoop();
+		//nsGLI::iGlInterface.RenderFrame();
     G_LoopTime.End();
 
     G_SwapTime.Begin();
-		SDL_GL_SwapWindow(loc_Wokynko->getWinPtr());
+
+    loc_Wokynko->SwapOglBuffers();
+
     G_SwapTime.End();
     
-		if (loc_cnt < 100U)
+		if (loc_cnt < 1000U)
 	  {
 			loc_cnt++;
 		}
 		else
 		{
 			loc_cnt = 0U;
-			std::cout << G_LoopTime.Get_mSec() << std::endl;
+
+      loc_Wokynko->GetWindowPosition(&loc_WinPosX, &loc_WinPosY);
+
+      ui32 loc_FrameTime = G_LoopTime.Get_uSec() + G_SwapTime.Get_uSec();
+
+      ui32 loc_FPS = 1000000 / loc_FrameTime;
+
+      std::string loc_NewWinTitpe = std::string("Imaginarium V0.1.0");
+
+      loc_NewWinTitpe += std::string(" FPS :") + std::to_string(loc_FPS);
+      loc_NewWinTitpe += std::string(" Frame Time :") + std::to_string(loc_FrameTime);
+      loc_Wokynko->UpdateWinTitle(loc_NewWinTitpe);
+
 		}
 	}
 

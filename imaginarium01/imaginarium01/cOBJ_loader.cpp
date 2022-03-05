@@ -6,13 +6,33 @@
 #include <algorithm>
 
 
-ui8 cOBJ_loader::StoreTriangle(std::vector<std::string>& arg_VertexIdxStr, cMesh * arg_ref_Mesh)
+ui8 cOBJ_loader::StoreTriangle(std::vector<std::string>& arg_VertexIdxStr, cMeshT * arg_ref_Mesh)
 {
   ui8 loc_RetValue = 0;
   glm::ivec3  loc_VertexA, loc_VertexB, loc_VertexC;
 
   if (arg_VertexIdxStr.size() == 3U)
-  {    
+  { 
+
+    std::size_t found = arg_VertexIdxStr[0].find("//");
+
+    if (found != std::string::npos)
+    {
+      arg_VertexIdxStr[0].insert(found+1, "0");
+    }
+    found = arg_VertexIdxStr[1].find("//");
+
+    if (found != std::string::npos)
+    {
+      arg_VertexIdxStr[1].insert(found + 1, "0");
+    }
+    found = arg_VertexIdxStr[2].find("//");
+
+    if (found != std::string::npos)
+    {
+      arg_VertexIdxStr[2].insert(found + 1, "0");
+    }
+    
     std::replace(arg_VertexIdxStr[0].begin(), arg_VertexIdxStr[0].end(), '/', ' ');
     std::replace(arg_VertexIdxStr[1].begin(), arg_VertexIdxStr[1].end(), '/', ' ');
     std::replace(arg_VertexIdxStr[2].begin(), arg_VertexIdxStr[2].end(), '/', ' ');
@@ -20,32 +40,47 @@ ui8 cOBJ_loader::StoreTriangle(std::vector<std::string>& arg_VertexIdxStr, cMesh
     std::stringstream loc_IdxStream;
     loc_IdxStream << arg_VertexIdxStr[0];
     loc_IdxStream >> loc_Idx;
-    loc_VertexA.x = std::stoi(loc_Idx) - 1U;
+    loc_VertexA.x = std::stoi(loc_Idx);
     loc_IdxStream >> loc_Idx;
-    loc_VertexA.y = std::stoi(loc_Idx) - 1U;
+    loc_VertexA.y = std::stoi(loc_Idx);
     loc_IdxStream >> loc_Idx;
-    loc_VertexA.z = std::stoi(loc_Idx) - 1U;
+    loc_VertexA.z = std::stoi(loc_Idx);
 
     loc_IdxStream << "";
     loc_IdxStream.clear();
     loc_IdxStream << arg_VertexIdxStr[1];
     loc_IdxStream >> loc_Idx;
-    loc_VertexB.x = std::stoi(loc_Idx) - 1U;
+    loc_VertexB.x = std::stoi(loc_Idx);
     loc_IdxStream >> loc_Idx;
-    loc_VertexB.y = std::stoi(loc_Idx) - 1U;
+    loc_VertexB.y = std::stoi(loc_Idx);
     loc_IdxStream >> loc_Idx;
-    loc_VertexB.z = std::stoi(loc_Idx) - 1U;
+    loc_VertexB.z = std::stoi(loc_Idx);
 
     loc_IdxStream << "";
     loc_IdxStream.clear();
     loc_IdxStream << arg_VertexIdxStr[2];
     loc_IdxStream >> loc_Idx;
-    loc_VertexC.x = std::stoi(loc_Idx) - 1U;
+    loc_VertexC.x = std::stoi(loc_Idx);
     loc_IdxStream >> loc_Idx;
-    loc_VertexC.y = std::stoi(loc_Idx) - 1U;
+    loc_VertexC.y = std::stoi(loc_Idx);
     loc_IdxStream >> loc_Idx;
-    loc_VertexC.z = std::stoi(loc_Idx) - 1U;
-    arg_ref_Mesh->AddTriangle(loc_VertexA, loc_VertexB, loc_VertexC);
+    loc_VertexC.z = std::stoi(loc_Idx);
+
+    cVertex loc_Vertex1;
+    loc_Vertex1.Position = tmp_VertexPositions[loc_VertexA.x];
+    loc_Vertex1.Normal   = tmp_VertexNormals[loc_VertexA.z];
+    loc_Vertex1.UV       = tmp_VertexUVs[loc_VertexA.y];
+    cVertex loc_Vertex2;
+    loc_Vertex2.Position = tmp_VertexPositions[loc_VertexB.x];
+    loc_Vertex2.Normal = tmp_VertexNormals[loc_VertexB.z];
+    loc_Vertex2.UV = tmp_VertexUVs[loc_VertexB.y];
+    cVertex loc_Vertex3;
+    loc_Vertex3.Position = tmp_VertexPositions[loc_VertexC.x];
+    loc_Vertex3.Normal = tmp_VertexNormals[loc_VertexC.z];
+    loc_Vertex3.UV = tmp_VertexUVs[loc_VertexC.y];
+
+
+    arg_ref_Mesh->AddTriangle(loc_Vertex1, loc_Vertex2, loc_Vertex3);
   }
   else
   {
@@ -57,14 +92,20 @@ ui8 cOBJ_loader::StoreTriangle(std::vector<std::string>& arg_VertexIdxStr, cMesh
 
 cOBJ_loader::cOBJ_loader()
 {
+  tmp_VertexPositions.push_back(glm::vec3(0, 0, 0));
+  tmp_VertexNormals.push_back(glm::vec3(0, 0, 0));
+  tmp_VertexUVs.push_back(glm::vec2(0, 0));
 }
 
 
 cOBJ_loader::~cOBJ_loader()
 {
+  tmp_VertexPositions.clear();
+  tmp_VertexNormals.clear();
+  tmp_VertexUVs.clear();
 }
 
-ui8 cOBJ_loader::LoadModel(std::string arg_FileName, cMesh * arg_ref_Mesh)
+ui8 cOBJ_loader::LoadModel(std::string arg_FileName, cMeshT * arg_ref_Mesh)
 {
   ui8 loc_RetValue = 0;
   ui32 loc_LineCnt = 0;
@@ -84,7 +125,7 @@ ui8 cOBJ_loader::LoadModel(std::string arg_FileName, cMesh * arg_ref_Mesh)
   return loc_RetValue;
 }
 
-ui8 cOBJ_loader::ProcessLine(std::string arg_line, cMesh * arg_ref_Mesh)
+ui8 cOBJ_loader::ProcessLine(std::string arg_line, cMeshT * arg_ref_Mesh)
 {
   std::istringstream loc_lineStream(arg_line);
   std::string loc_tmp;
@@ -99,7 +140,8 @@ ui8 cOBJ_loader::ProcessLine(std::string arg_line, cMesh * arg_ref_Mesh)
     float loc_Ypos = std::stof(loc_tmp);
     loc_lineStream >> loc_tmp;
     float loc_Zpos = std::stof(loc_tmp);
-    arg_ref_Mesh->AddVertexPosition(glm::vec3(loc_Xpos, loc_Ypos, loc_Zpos));   
+    tmp_VertexPositions.push_back(glm::vec3(loc_Xpos, loc_Ypos, loc_Zpos));
+    //arg_ref_Mesh->AddVertexPosition(glm::vec3(loc_Xpos, loc_Ypos, loc_Zpos));   
   } 
   if (loc_tmp == "vn") // process vertex normal
   {
@@ -109,7 +151,8 @@ ui8 cOBJ_loader::ProcessLine(std::string arg_line, cMesh * arg_ref_Mesh)
     float loc_Ypos = std::stof(loc_tmp);
     loc_lineStream >> loc_tmp;
     float loc_Zpos = std::stof(loc_tmp);
-    arg_ref_Mesh->AddVertexNormal(glm::vec3(loc_Xpos, loc_Ypos, loc_Zpos));
+    tmp_VertexNormals.push_back(glm::vec3(loc_Xpos, loc_Ypos, loc_Zpos));
+    //arg_ref_Mesh->AddVertexNormal(glm::vec3(loc_Xpos, loc_Ypos, loc_Zpos));
   }
   if (loc_tmp == "vt") // process texturing coordinates
   {
@@ -117,7 +160,8 @@ ui8 cOBJ_loader::ProcessLine(std::string arg_line, cMesh * arg_ref_Mesh)
     float loc_Xpos = std::stof(loc_tmp);
     loc_lineStream >> loc_tmp;
     float loc_Ypos = std::stof(loc_tmp);
-    arg_ref_Mesh->AddVertexUV(glm::vec2(loc_Xpos, loc_Ypos));
+    tmp_VertexUVs.push_back(glm::vec2(loc_Xpos, loc_Ypos ));
+    //arg_ref_Mesh->AddVertexUV(glm::vec2(loc_Xpos, loc_Ypos));
   }
 
   if (loc_tmp == "f") // process triangles (if poligon/quad - split to triangles)

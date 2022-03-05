@@ -40,7 +40,7 @@ ui8 cShader::InitShader(void)
   glGetShaderiv(ShaderID, GL_COMPILE_STATUS, &loc_GL_ResultStatus); // check shader compilation status
   if (!loc_GL_ResultStatus)
   {  // if shader compilation failed - report error
-    glGetShaderInfoLog(ShaderID, 1024, NULL, loc_GL_infoLog);
+    glGetShaderInfoLog(ShaderID, 1023, NULL, loc_GL_infoLog);
     std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << loc_GL_infoLog << std::endl;
     loc_RetValue++;
   }

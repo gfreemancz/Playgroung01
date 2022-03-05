@@ -35,6 +35,11 @@ public:
   {
     glBindVertexArray(VAO_id);
   }
+  //activate VAO in GPU
+  void UnBindVAO(void)
+  {
+    glBindVertexArray(0);
+  }
 
 
   cVertexArrayObject();

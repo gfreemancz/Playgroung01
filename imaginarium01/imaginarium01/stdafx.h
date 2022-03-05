@@ -6,13 +6,9 @@
 #define STDAFX_H
 
 
-//#include <stdio.h>
 #include <tchar.h>
 #include <iostream>
 
-#ifndef CCOMMANDBASE_H_
-#include "cCommandBase.h"
-#endif
 
 #define PI 3.14159265
 

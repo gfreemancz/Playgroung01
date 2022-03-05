@@ -4,6 +4,7 @@
  *  Created on: 19. 2. 2017
  *      Author: GFreeman
  */
+#include "stdafx.h" 
 
 #include "GLI/cOpenGLInterface.h"
 

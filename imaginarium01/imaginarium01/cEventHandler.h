@@ -12,6 +12,10 @@
 	#include "stdafx.h"
 #endif
 
+#ifndef CCOMMANDBASE_H_
+#include "cCommandBase.h"
+#endif
+
 #include <vector>
 #include <SDL.h>
 #include <map>

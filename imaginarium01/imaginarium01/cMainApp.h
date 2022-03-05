@@ -11,10 +11,11 @@
 #include "cTimeMeasure.h"
 
 class cMainApp {
+public:
   static cTimeMeasure InitTime;
   static cTimeMeasure RunLoopTime;
   static cTimeMeasure ShutDownInitTime;
-public:
+
   static void Init(void);
   static void RunLoop(void);
   static void ShutDown(void);

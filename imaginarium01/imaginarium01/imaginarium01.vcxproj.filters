@@ -54,9 +54,6 @@
     <ClInclude Include="GLI\cFrameBuffer.h">
       <Filter>Source Files\GLI</Filter>
     </ClInclude>
-    <ClInclude Include="cMesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cOBJ_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -522,6 +519,24 @@
     <ClInclude Include="..\..\..\glm-0.9.9.0\glm\vector_relational.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cMesh.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cDrawPackage.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cGLBufferObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cQuaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Camera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -588,6 +603,24 @@
       <Filter>Source Files\GLI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\glm-0.9.9.0\glm\detail\glm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cDrawPackage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cGLBufferObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cQuaternion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

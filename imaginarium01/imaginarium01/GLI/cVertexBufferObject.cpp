@@ -33,7 +33,8 @@ cVertexBufferObject::~cVertexBufferObject()
   //if not empty, delete data in RAM
   if (Data.size() > 0)
   {
-    delete &Data;
+    Data.clear();
+  //  delete &Data;
   }
   //if needed, delete VBO in GPU
   if (VBO_id != -1)

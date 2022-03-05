@@ -15,6 +15,7 @@ public:
   ui8   InitShaderProgram(cShader *arg_VertexShader, cShader *arg_FragmentShader);
   ui8   InitShaderProgram(cShader *arg_VertexShader, cShader *arg_FragmentShader, cShader *arg_GeometryShader);
   void  Use(void);
+  void  Stop(void);
   
 
   cShaderProgram();

@@ -112,6 +112,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>false</SDLCheck>
       <PrecompiledHeaderFile />
+      <AdditionalIncludeDirectories>C:\development\glm-0.9.9.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -311,12 +312,17 @@
     <ClInclude Include="..\..\..\glm-0.9.9.0\glm\vec4.hpp" />
     <ClInclude Include="..\..\..\glm-0.9.9.0\glm\vector_relational.hpp" />
     <ClInclude Include="cBaseEngineObject.h" />
+    <ClInclude Include="cDrawPackage.h" />
     <ClInclude Include="cEventHandler.h" />
+    <ClInclude Include="cGLBufferObject.h" />
     <ClInclude Include="cMainApp.h" />
     <ClInclude Include="cMesh.h" />
+    <ClInclude Include="cModel.h" />
     <ClInclude Include="cMyRandom.h" />
     <ClInclude Include="cMyWindow.h" />
     <ClInclude Include="cOBJ_loader.h" />
+    <ClInclude Include="cQuaternion.h" />
+    <ClInclude Include="c_Camera.h" />
     <ClInclude Include="cRenderer.h" />
     <ClInclude Include="cShader.h" />
     <ClInclude Include="cShaderProgram.h" />
@@ -336,12 +342,17 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\glm-0.9.9.0\glm\detail\glm.cpp" />
     <ClCompile Include="cBaseEngineObject.cpp" />
+    <ClCompile Include="cDrawPackage.cpp" />
     <ClCompile Include="cEventHandler.cpp" />
+    <ClCompile Include="cGLBufferObject.cpp" />
     <ClCompile Include="cMainApp.cpp" />
     <ClCompile Include="cMesh.cpp" />
+    <ClCompile Include="cModel.cpp" />
     <ClCompile Include="cMyRandom.cpp" />
     <ClCompile Include="cMyWindow.cpp" />
     <ClCompile Include="cOBJ_loader.cpp" />
+    <ClCompile Include="cQuaternion.cpp" />
+    <ClCompile Include="c_Camera.cpp" />
     <ClCompile Include="cRenderer.cpp" />
     <ClCompile Include="cShader.cpp" />
     <ClCompile Include="cShaderProgram.cpp" />
@@ -355,6 +366,7 @@
     <ClCompile Include="GLI\cVertexBufferObject.cpp" />
     <ClCompile Include="cGL_Texture.cpp" />
     <ClCompile Include="imaginarium01.cpp" />
+    <ClCompile Include="EventHandling.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

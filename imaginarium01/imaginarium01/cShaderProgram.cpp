@@ -6,7 +6,7 @@ ui8 cShaderProgram::InitShaderProgram(cShader * arg_VertexShader, cShader * arg_
 {
   ui8     loc_ReturnValue = 0;
   GLint   loc_GL_ResultStatus = 0;
-  GLchar  loc_GL_infoLog[16];
+  GLchar  loc_GL_infoLog[1024];
 
   // put pointers to shader in list
   ShaderList.push_back(arg_VertexShader);
@@ -21,7 +21,7 @@ ui8 cShaderProgram::InitShaderProgram(cShader * arg_VertexShader, cShader * arg_
   glGetProgramiv(ShaderProgID, GL_LINK_STATUS, &loc_GL_ResultStatus);
   if (!loc_GL_ResultStatus) 
   {  // if linkinng failed - report error
-    glGetProgramInfoLog(ShaderProgID, 1024, NULL, loc_GL_infoLog);
+    glGetProgramInfoLog(ShaderProgID, 1023, NULL, loc_GL_infoLog);
     std::cout << "error: linking of shader program failed \n" << loc_GL_infoLog << std::endl;
     loc_ReturnValue++;
   }
@@ -45,12 +45,15 @@ ui8 cShaderProgram::InitShaderProgram(cShader * arg_VertexShader, cShader * arg_
   glAttachShader(ShaderProgID, ShaderList[0]->getID());// attach 1st shader
   glAttachShader(ShaderProgID, ShaderList[1]->getID());// attach 2nd shader
   glAttachShader(ShaderProgID, ShaderList[2]->getID());// attach 3th shader
+
+  //glBindAttribLocation(ShaderProgID, 0, "aPos");
+
   glLinkProgram(ShaderProgID);                         // link shader program
 
   glGetProgramiv(ShaderProgID, GL_LINK_STATUS, &loc_GL_ResultStatus);
   if (!loc_GL_ResultStatus) 
   { // if linkinng failed - report error
-    glGetProgramInfoLog(ShaderProgID, 1024, NULL, loc_GL_infoLog);
+    glGetProgramInfoLog(ShaderProgID, 1023, NULL, loc_GL_infoLog);
     std::cout << "error: linking of shader program failed \n" << loc_GL_infoLog << std::endl;
     loc_ReturnValue++;
   }
@@ -68,6 +71,11 @@ void cShaderProgram::Use(void)
   {   // if shaderprogram was not initialized, report error
     std::cout << "error: Trying to use uninitialized shader program" << std::endl;
   }
+}
+
+void cShaderProgram::Stop(void)
+{
+  glUseProgram(0U);
 }
 
 cShaderProgram::cShaderProgram() :
