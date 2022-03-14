@@ -62,10 +62,15 @@ void cRenderer::Draw(void)
   }
 
   //TODO setup projection (matrix to shader or ogl setting?) - implement camera
+  ui32 loc_MVP_id = ShaderProgram->GetUniformLocation("MVP");
 
+  glm::mat4x4 loc_VP = ActiveCamera->GetViewMatrix();
+  glm::mat4x4 loc_M = glm::mat4x4(1.0f);
+  glm::mat4x4 loc_MVP = loc_VP * loc_M;
 
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
+  ShaderProgram->SetUniformMatrix4x4(loc_MVP_id, &loc_MVP);
+
+ 
 
   //TODO call "draw package" draw call
   tmp_mesh.Draw();

@@ -56,19 +56,23 @@ cMeshT g_testMesh;
 
 void RegisterEventsToHandler(cEventHandler* arg_EventHandler);
 
+cEventHandler G_EventHandler;
+
+ui32 G_FrameTime;
+cMyWindow * G_Wokynko = nullptr;
 
 int main(int argc, char *argv[])
 {
-	cEventHandler loc_EventHandler;
+	
 	bool loc_AppRunning = true;
-	cMyWindow * loc_Wokynko = nullptr;
+
 
   si32 loc_WinPosX = 255, loc_WinPosY = 512;
 
   std::cout << "hello world" << std::endl;
   
 
-  RegisterEventsToHandler(&loc_EventHandler);
+  RegisterEventsToHandler(&G_EventHandler);
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -76,8 +80,8 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		loc_Wokynko = new cMyWindow("Imaginarium V0.1.0", 100, 100, 800, 600);
-		if (nsGLI::iGlInterface.Init(loc_Wokynko) != 0)
+		G_Wokynko = new cMyWindow("Imaginarium V0.1.0", 100, 100, 800, 600);
+		if (nsGLI::iGlInterface.Init(G_Wokynko) != 0)
 		{
 			std::cout << "initialization of OpenGL failed" << std::endl;
 		}
@@ -103,14 +107,14 @@ int main(int argc, char *argv[])
 
     
 
-		loc_EventHandler.cyclic();
+    G_EventHandler.cyclic();
     cMainApp::RunLoop();
 		//nsGLI::iGlInterface.RenderFrame();
     G_LoopTime.End();
 
     G_SwapTime.Begin();
 
-    loc_Wokynko->SwapOglBuffers();
+    G_Wokynko->SwapOglBuffers();
 
     G_SwapTime.End();
     
@@ -122,22 +126,22 @@ int main(int argc, char *argv[])
 		{
 			loc_cnt = 0U;
 
-      loc_Wokynko->GetWindowPosition(&loc_WinPosX, &loc_WinPosY);
+      G_Wokynko->GetWindowPosition(&loc_WinPosX, &loc_WinPosY);
 
-      ui32 loc_FrameTime = G_LoopTime.Get_uSec() + G_SwapTime.Get_uSec();
+      G_FrameTime = G_LoopTime.Get_uSec() + G_SwapTime.Get_uSec();
 
-      ui32 loc_FPS = 1000000 / loc_FrameTime;
+      ui32 loc_FPS = 1000000 / G_FrameTime;
 
       std::string loc_NewWinTitpe = std::string("Imaginarium V0.1.0");
 
       loc_NewWinTitpe += std::string(" FPS :") + std::to_string(loc_FPS);
-      loc_NewWinTitpe += std::string(" Frame Time :") + std::to_string(loc_FrameTime);
-      loc_Wokynko->UpdateWinTitle(loc_NewWinTitpe);
+      loc_NewWinTitpe += std::string(" Frame Time :") + std::to_string(G_FrameTime);
+      G_Wokynko->UpdateWinTitle(loc_NewWinTitpe);
 
 		}
 	}
 
-	nsGLI::iGlInterface.Clean(loc_Wokynko);
+	nsGLI::iGlInterface.Clean(G_Wokynko);
 
 	std::cout << "!!!Fuck You World!!!" << std::endl;
   

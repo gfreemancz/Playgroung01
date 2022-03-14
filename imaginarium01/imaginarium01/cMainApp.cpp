@@ -19,6 +19,18 @@
 
 #include "cOBJ_loader.h"
 
+#include "c_Camera.h"
+
+#include "cKeyBasedControlHandler.h"
+
+#include "cTexture.h"
+
+#include <vector>
+
+
+
+void RegisterControlCommandToHandler(cKeyBasedControlHandler* arg_ControlHandler);
+
 
 nsGLI::cVertexArrayObject iVAO;
 
@@ -26,12 +38,15 @@ cTimeMeasure cMainApp::InitTime;
 cTimeMeasure cMainApp::RunLoopTime;
 cTimeMeasure cMainApp::ShutDownInitTime;
 
+cKeyBasedControlHandler KeyboardControl;
+extern cEventHandler G_EventHandler;
+
 
 
 nsGLI::cFrameBuffer instFrameBufferTest01(800,600);
 nsGLI::cGL_Texture  instTextureTest01(800, 600, GL_TEXTURE_2D, GL_RGBA);
 
-
+std::vector<cTexture> TextureContainer;
 
 //instances of shaders
 cShader testShader_V(std::string("../Shaders/VertexShader01.glsl"), GL_VERTEX_SHADER);
@@ -40,6 +55,8 @@ cShaderProgram testShaderProgram;
 
 //instance of renderer class
 cRenderer iRenderer;
+
+cCamera iMainCamera(glm::vec3(0,0,1.0f), glm::vec3(0,0,-1.0f), glm::vec3(0,1,0));
 
 
 void cMainApp::Init(void)
@@ -52,6 +69,7 @@ void cMainApp::Init(void)
   instTextureTest01.GenerateTexture();
   instTextureTest01.AlocateDataSpaceB();
 
+  cTexture loc_texture;
 
 
   instFrameBufferTest01.InitFBO();
@@ -73,10 +91,12 @@ void cMainApp::Init(void)
   iRenderer.AddCleaninFlags(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
   iRenderer.SetCleanColor(0.0f,0.0f,1.0f,1.0f);
 
+  iRenderer.AsignCamera(&iMainCamera);
+
 
   //add temporary mesh for testing - remove when draw package is implemented
 
- /* cVertex loc_TmpVertexA;
+  cVertex loc_TmpVertexA;
   cVertex loc_TmpVertexB;
   cVertex loc_TmpVertexC;
   cVertex loc_TmpVertexD;
@@ -94,7 +114,7 @@ void cMainApp::Init(void)
   loc_TmpVertexA.UV = glm::vec2(0.0, 0.0);
   loc_TmpVertexB.UV = glm::vec2(0.0, 1.0);
   loc_TmpVertexC.UV = glm::vec2(1.0, 1.0);
-  loc_TmpVertexD.UV = glm::vec2(1.0, 0.0);*/
+  loc_TmpVertexD.UV = glm::vec2(1.0, 0.0);
 
   //iRenderer.tmp_mesh.AddQuad(loc_TmpVertexA, loc_TmpVertexB, loc_TmpVertexC, loc_TmpVertexD);
 
@@ -103,12 +123,18 @@ void cMainApp::Init(void)
   iRenderer.tmp_mesh.CreateVBO();
 
 
+
+  //init of control handler
+  RegisterControlCommandToHandler(&KeyboardControl);
+
   InitTime.End();
 }
 
 void cMainApp::RunLoop(void)
 {
   RunLoopTime.Begin();
+
+  KeyboardControl.Cyclic(&G_EventHandler);
 
   iRenderer.Draw();
 

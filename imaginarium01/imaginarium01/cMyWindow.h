@@ -26,5 +26,7 @@ public:
   void SwapOglBuffers(void);
   void GetWindowPosition(si32 * arg_x, si32 * arg_y);
   void UpdateWinTitle(std::string arg_NewTitle);
+  ui32 GetWidth(void) { return Width; }
+  ui32 GetHeight(void) { return Height; }
 };
 #endif

@@ -113,6 +113,7 @@
       <SDLCheck>false</SDLCheck>
       <PrecompiledHeaderFile />
       <AdditionalIncludeDirectories>C:\development\glm-0.9.9.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -315,9 +316,10 @@
     <ClInclude Include="cDrawPackage.h" />
     <ClInclude Include="cEventHandler.h" />
     <ClInclude Include="cGLBufferObject.h" />
+    <ClInclude Include="cKeyBasedControlHandler.h" />
     <ClInclude Include="cMainApp.h" />
     <ClInclude Include="cMesh.h" />
-    <ClInclude Include="cModel.h" />
+    <ClInclude Include="cObject.h" />
     <ClInclude Include="cMyRandom.h" />
     <ClInclude Include="cMyWindow.h" />
     <ClInclude Include="cOBJ_loader.h" />
@@ -345,9 +347,10 @@
     <ClCompile Include="cDrawPackage.cpp" />
     <ClCompile Include="cEventHandler.cpp" />
     <ClCompile Include="cGLBufferObject.cpp" />
+    <ClCompile Include="cKeyBasedControlHandler.cpp" />
     <ClCompile Include="cMainApp.cpp" />
     <ClCompile Include="cMesh.cpp" />
-    <ClCompile Include="cModel.cpp" />
+    <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cMyRandom.cpp" />
     <ClCompile Include="cMyWindow.cpp" />
     <ClCompile Include="cOBJ_loader.cpp" />

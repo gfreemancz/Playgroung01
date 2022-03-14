@@ -78,6 +78,16 @@ void cShaderProgram::Stop(void)
   glUseProgram(0U);
 }
 
+ui32 cShaderProgram::GetUniformLocation(std::string arg_UniformVariableName)
+{
+  return (ui32)glGetUniformLocation(ShaderProgID, arg_UniformVariableName.c_str());
+}
+
+void cShaderProgram::SetUniformMatrix4x4(ui32 arg_id, glm::mat4x4 * arg_MatrixPtr)
+{
+  glUniformMatrix4fv(arg_id, 1, GL_FALSE, (float*)arg_MatrixPtr);
+}
+
 cShaderProgram::cShaderProgram() :
   ShaderProgID(0),
   ShaderList()

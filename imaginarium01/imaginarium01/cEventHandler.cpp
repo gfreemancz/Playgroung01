@@ -43,6 +43,16 @@ void cEventHandler::RegisterKeyup(Sint32 arg_KeyCode, cCommandBase * arg_command
 	}
 }
 
+ui8 cEventHandler::GetKeyState(ui16 arg_Key)
+{
+  ui8 loc_RetValue = 0U;
+  if (arg_Key < 512)
+  {
+    loc_RetValue = KeyState[arg_Key];
+  }
+  return loc_RetValue;
+}
+
 void cEventHandler::RunCommand(cCommandBase * arg_Command)
 {
 	if(arg_Command!=0)
@@ -61,12 +71,12 @@ void cEventHandler::cyclic()
 			RunCommand(SystemCommands[SDL_QUIT]);
 			break;
 		case SDL_KEYDOWN:
-			KeyState[Event.key.keysym.sym] = true;
-			RunCommand(KeyPressCommands[Event.key.keysym.sym]);
+			KeyState[Event.key.keysym.scancode] = true;
+			RunCommand(KeyPressCommands[Event.key.keysym.scancode]);
 			break ;
 		case SDL_KEYUP:
-			KeyState[Event.key.keysym.sym] = false;
-			RunCommand(KeyFreeCommands[Event.key.keysym.sym]);
+			KeyState[Event.key.keysym.scancode] = false;
+			RunCommand(KeyFreeCommands[Event.key.keysym.scancode]);
 			break ;
 		case SDL_MOUSEBUTTONDOWN:
 			RunCommand(SystemCommands[SDL_MOUSEBUTTONDOWN]);

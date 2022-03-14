@@ -525,9 +525,6 @@
     <ClInclude Include="cDrawPackage.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="cModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cGLBufferObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -535,6 +532,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="c_Camera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cKeyBasedControlHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cObject.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -608,9 +611,6 @@
     <ClCompile Include="cDrawPackage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cGLBufferObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -621,6 +621,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventHandling.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cKeyBasedControlHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

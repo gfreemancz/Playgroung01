@@ -11,6 +11,6 @@ in vec2 coordinate;
 
 void main()
 {
-   // FragColor = vec4(tstColor.x, tstColor.y, tstColor.z, 1.0f);
-    FragColor = vec4(sin(coordinate.x*PI*3), sin(coordinate.y*PI*3), 0, 1.0f);
+    FragColor = vec4(tstColor.x, tstColor.y, tstColor.z, 1.0f);
+    //FragColor = vec4(sin(coordinate.x*PI*3), sin(coordinate.y*PI*3), 0, 1.0f);
 } 

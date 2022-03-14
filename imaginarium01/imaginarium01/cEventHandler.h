@@ -29,6 +29,7 @@ public:
 	void RegisterEvent(ui32 arg_EventType, cCommandBase * arg_command);
 	void RegisterKeyDown(Sint32 arg_KeyCode, cCommandBase * arg_command);
 	void RegisterKeyup(Sint32 arg_KeyCode, cCommandBase * arg_command);
+  ui8  GetKeyState(ui16 arg_Key);
 
 private:
 	ui8 KeyState[512];
