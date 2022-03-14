@@ -10,13 +10,14 @@
 // class cModel represents combination of 3d information (vertexes, UV coordinates, normals - mesh)
 // testure information and OpenGL stuff to draw it
 //***********************************************
-class cModel
+class cObject
 {
 public:
   cMeshT Mesh;
   glm::mat4x4 GetModelTransformaMatrix(void);
   void SetPosition(glm::vec3 arg_Position);
   void SetRotation(glm::vec3 arg_Rotation);
+  void LinkTexture(cTexture * arg_TexturePtr);
 private:
   glm::vec3 Position;
   glm::vec3 Rotation;

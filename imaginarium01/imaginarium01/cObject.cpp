@@ -1,6 +1,6 @@
-#include "cModel.h"
+#include "cObject.h"
 
-glm::mat4x4 cModel::GetModelTransformaMatrix(void)
+glm::mat4x4 cObject::GetModelTransformaMatrix(void)
 {
   glm::mat4x4 loc_ReturnMatrix(1.0f);
 
@@ -12,12 +12,17 @@ glm::mat4x4 cModel::GetModelTransformaMatrix(void)
   return glm::mat4x4();
 }
 
-void cModel::SetPosition(glm::vec3 arg_Position)
+void cObject::SetPosition(glm::vec3 arg_Position)
 {
   Position = arg_Position;
 }
 
-void cModel::SetRotation(glm::vec3 arg_Rotation)
+void cObject::SetRotation(glm::vec3 arg_Rotation)
 {
   Rotation = arg_Rotation;
+}
+
+void cObject::LinkTexture(cTexture* arg_TexturePtr)
+{
+  pTexture = arg_TexturePtr;
 }
