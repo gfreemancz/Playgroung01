@@ -160,8 +160,15 @@ public:
   {
     (void)arg_argument;
     extern cMyWindow* G_Wokynko;
-    SDL_WarpMouseInWindow(G_Wokynko->getWinPtr(), G_Wokynko->GetWidth()/2U, G_Wokynko->GetHeight() / 2U);
-    G_MouseControlCamera = true;
+    if (G_MouseControlCamera)
+    {
+      G_MouseControlCamera = false;
+    }
+    else
+    {
+      SDL_WarpMouseInWindow(G_Wokynko->getWinPtr(), G_Wokynko->GetWidth() / 2U, G_Wokynko->GetHeight() / 2U);
+      G_MouseControlCamera = true;
+    }
   }
 };
 

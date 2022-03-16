@@ -47,5 +47,7 @@ public:
   void BindTexture(void);
   void UnBindTexture(void);
 
+  ui8 LoadPictureFromFile(std::string arg_FileName);
+
 };
 

@@ -56,7 +56,7 @@ cShaderProgram testShaderProgram;
 //instance of renderer class
 cRenderer iRenderer;
 
-cCamera iMainCamera(glm::vec3(0,0,1.0f), glm::vec3(0,0,-1.0f), glm::vec3(0,1,0));
+cCamera iMainCamera(glm::vec3(0,0,30.0f), glm::vec3(0,0,-1.0f), glm::vec3(0,1,0));
 
 
 void cMainApp::Init(void)
@@ -71,6 +71,10 @@ void cMainApp::Init(void)
 
   cTexture loc_texture;
 
+  TextureContainer.push_back(cTexture());
+  //TextureContainer[0].LoadPictureFromFile("C:\\development\\resources\\cottage\\cottage_diffuse_2.png");
+  TextureContainer[0].LoadPictureFromFile("C:\\development\\resources\\cottage\\testTex.png");
+  TextureContainer[0].LoadToGpu();
 
   instFrameBufferTest01.InitFBO();
   instFrameBufferTest01.BindFBO();
@@ -116,9 +120,9 @@ void cMainApp::Init(void)
   loc_TmpVertexC.UV = glm::vec2(1.0, 1.0);
   loc_TmpVertexD.UV = glm::vec2(1.0, 0.0);
 
-  //iRenderer.tmp_mesh.AddQuad(loc_TmpVertexA, loc_TmpVertexB, loc_TmpVertexC, loc_TmpVertexD);
+ // iRenderer.tmp_mesh.AddQuad(loc_TmpVertexA, loc_TmpVertexB, loc_TmpVertexC, loc_TmpVertexD);
 
-  iRenderer.tmp_mesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\cottage\\cottage_obj.obj");
+  iRenderer.tmp_mesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\cottage\\TestCube01.obj");
 
   iRenderer.tmp_mesh.CreateVBO();
 
@@ -135,8 +139,9 @@ void cMainApp::RunLoop(void)
   RunLoopTime.Begin();
 
   KeyboardControl.Cyclic(&G_EventHandler);
-
+  TextureContainer[0].BindTexture();
   iRenderer.Draw();
+  TextureContainer[0].UnBindTexture();
 
   RunLoopTime.End();
 }

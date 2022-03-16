@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "cTexture.h"
 #include <iostream>
-
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_error.h"
 
 
 
@@ -36,6 +38,7 @@ cTexture::cTexture(bool arg_StoreData) :
 
 cTexture::~cTexture()
 {
+  delete TextureDataPtr;
 }
 
 void cTexture::Init(ui32 arg_width, ui32 arg_height, ui16 arg_DataFormat, ui8 * arg_DataPtr, ui16 arg_TextureUnitUsed)
@@ -93,6 +96,44 @@ void cTexture::UnBindTexture(void)
 {
   glActiveTexture(TextureUnitUsed);
   glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+ui8 cTexture::LoadPictureFromFile(std::string arg_FileName)
+{
+  ui8 loc_ReturnValue = 0U;
+  SDL_Surface* loc_PictureSurface;
+  ui8* loc_DataPtr;
+  ui32 loc_DataSize;
+  ui16 loc_colorFormat = 0;//GL_RGBA;
+
+
+  loc_PictureSurface = IMG_Load(arg_FileName.c_str());
+  if (loc_PictureSurface)
+  {
+    loc_DataSize = loc_PictureSurface->w * loc_PictureSurface->h * loc_PictureSurface->format->BytesPerPixel;
+
+    loc_DataPtr = new ui8[loc_DataSize];
+
+    memcpy(loc_DataPtr, loc_PictureSurface->pixels, loc_DataSize);
+
+    if (loc_PictureSurface->format->BytesPerPixel == 3)
+    {
+      loc_colorFormat = GL_RGB;
+    }
+
+    Init(loc_PictureSurface->w, loc_PictureSurface->h, loc_colorFormat,loc_DataPtr,1);
+    //loc_PictureSurface->pixels
+
+    //delete loc_DataPtr;
+
+    SDL_FreeSurface(loc_PictureSurface);
+
+  }
+  else
+  {
+    std::cout << IMG_GetError() << std::endl;
+  }
+  return loc_ReturnValue;
 }
 
 
