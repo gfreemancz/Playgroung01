@@ -3,11 +3,10 @@
 #include "stdafx.h"
 #include "cShaderProgram.h"
 #include "cFrameBuffer.h"
-
 #include "c_Camera.h"
-
-
 #include "cMesh.h"
+
+#include <vector>
 
 
 class cRenderer
@@ -23,7 +22,9 @@ class cRenderer
   
 
 public:
-  cMeshT tmp_mesh;
+  std::vector<cMeshT*> MeshPackage;
+
+
 
   cRenderer();
   cRenderer(nsGLI::cFrameBuffer * arg_TargetFBO);
@@ -36,5 +37,6 @@ public:
   void AttachShaderProgram(cShaderProgram* arg_ShProg) { ShaderProgram = arg_ShProg; }
 	void Draw(void);
   void AsignCamera(cCamera* arg_Camera);
+  void AddMesh(cMeshT * arg_pMesh);
 };
 

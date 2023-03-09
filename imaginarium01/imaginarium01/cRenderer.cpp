@@ -13,8 +13,7 @@ cRenderer::cRenderer():
   ClearColor_R(0.0f),
   ClearColor_G(0.0f),
   ClearColor_B(0.0f),
-  ClearColor_A(1.0f),
-  tmp_mesh()
+  ClearColor_A(1.0f)
 {
 }
 
@@ -25,8 +24,7 @@ cRenderer::cRenderer(nsGLI::cFrameBuffer* arg_TargetFBO):
   ClearColor_R(0.0f),
   ClearColor_G(0.0f),
   ClearColor_B(0.0f),
-  ClearColor_A(1.0f),
-  tmp_mesh()
+  ClearColor_A(1.0f)
 {
 }
 
@@ -72,8 +70,12 @@ void cRenderer::Draw(void)
 
  
 
-  //TODO call "draw package" draw call
-  tmp_mesh.Draw();
+  // call "draw" for all mesh object in mesh package
+  for (ui16 i = 0; i < MeshPackage.size(); i++)
+  {
+    MeshPackage[i]->Draw();
+  }
+ 
 
   //unbind last texture
   //unbind shader program
@@ -91,4 +93,9 @@ void cRenderer::Draw(void)
 void cRenderer::AsignCamera(cCamera* arg_Camera)
 {
   ActiveCamera = arg_Camera;
+}
+
+void cRenderer::AddMesh(cMeshT* arg_pMesh)
+{
+  MeshPackage.push_back(arg_pMesh);
 }

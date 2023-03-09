@@ -130,7 +130,7 @@ int ReadSectorMap(std::string arg_path, std::string arg_FileName)
   //  loc_OutputFile << loc_TilePtr[i].data[3];
   //}
 
-  char loc_idx = 3;
+  char loc_idx = 0;
   
 
   for (uint32_t i = 0; i < loc_TileCount; i++)

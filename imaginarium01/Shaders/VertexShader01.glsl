@@ -15,7 +15,6 @@ void main()
 {
 
     gl_Position =  MVP * vec4(aPos.x, aPos.y,  aPos.z, 1.0);
-
 	coordinate = aUV;
 
 }

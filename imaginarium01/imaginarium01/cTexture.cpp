@@ -103,18 +103,28 @@ ui8 cTexture::LoadPictureFromFile(std::string arg_FileName)
   ui8 loc_ReturnValue = 0U;
   SDL_Surface* loc_PictureSurface;
   ui8* loc_DataPtr;
+  ui8* loc_SrcPtr;
   ui32 loc_DataSize;
-  ui16 loc_colorFormat = 0;//GL_RGBA;
+  ui16 loc_colorFormat = GL_RGBA;
+  ui32 loc_LineDataSize;
 
 
   loc_PictureSurface = IMG_Load(arg_FileName.c_str());
   if (loc_PictureSurface)
   {
-    loc_DataSize = loc_PictureSurface->w * loc_PictureSurface->h * loc_PictureSurface->format->BytesPerPixel;
+    loc_LineDataSize = loc_PictureSurface->h * loc_PictureSurface->format->BytesPerPixel;
+
+    loc_DataSize = loc_PictureSurface->w * loc_LineDataSize;
 
     loc_DataPtr = new ui8[loc_DataSize];
 
-    memcpy(loc_DataPtr, loc_PictureSurface->pixels, loc_DataSize);
+    loc_SrcPtr = (ui8*)loc_PictureSurface->pixels;
+
+    for (ui32 loc_idx = 0; loc_idx < loc_PictureSurface->h; loc_idx++)
+    {
+      memcpy(&loc_DataPtr[loc_idx* loc_LineDataSize], &loc_SrcPtr[(loc_PictureSurface->h-loc_idx+1)* loc_LineDataSize], loc_LineDataSize);
+
+    }
 
     if (loc_PictureSurface->format->BytesPerPixel == 3)
     {
@@ -122,9 +132,7 @@ ui8 cTexture::LoadPictureFromFile(std::string arg_FileName)
     }
 
     Init(loc_PictureSurface->w, loc_PictureSurface->h, loc_colorFormat,loc_DataPtr,1);
-    //loc_PictureSurface->pixels
 
-    //delete loc_DataPtr;
 
     SDL_FreeSurface(loc_PictureSurface);
 

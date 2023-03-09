@@ -136,6 +136,7 @@ int main(int argc, char *argv[])
 
       loc_NewWinTitpe += std::string(" FPS :") + std::to_string(loc_FPS);
       loc_NewWinTitpe += std::string(" Frame Time :") + std::to_string(G_FrameTime);
+      loc_NewWinTitpe += std::string(" app loop Time :") + std::to_string(cMainApp::RunLoopTime.Get_uSec());
       G_Wokynko->UpdateWinTitle(loc_NewWinTitpe);
 
 		}

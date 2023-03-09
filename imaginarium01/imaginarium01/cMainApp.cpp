@@ -48,6 +48,8 @@ nsGLI::cGL_Texture  instTextureTest01(800, 600, GL_TEXTURE_2D, GL_RGBA);
 
 std::vector<cTexture> TextureContainer;
 
+std::vector<cMeshT> MeshContainer;
+
 //instances of shaders
 cShader testShader_V(std::string("../Shaders/VertexShader01.glsl"), GL_VERTEX_SHADER);
 cShader testShader_F(std::string("../Shaders/FragmentShader01.glsl"), GL_FRAGMENT_SHADER);
@@ -72,8 +74,8 @@ void cMainApp::Init(void)
   cTexture loc_texture;
 
   TextureContainer.push_back(cTexture());
-  //TextureContainer[0].LoadPictureFromFile("C:\\development\\resources\\cottage\\cottage_diffuse_2.png");
-  TextureContainer[0].LoadPictureFromFile("C:\\development\\resources\\cottage\\testTex.png");
+  TextureContainer[0].LoadPictureFromFile("C:\\development\\resources\\cottage\\cottage_diffuse_2.png");
+  //TextureContainer[0].LoadPictureFromFile("C:\\development\\resources\\cottage\\testTex_a.png");
   TextureContainer[0].LoadToGpu();
 
   instFrameBufferTest01.InitFBO();
@@ -120,11 +122,20 @@ void cMainApp::Init(void)
   loc_TmpVertexC.UV = glm::vec2(1.0, 1.0);
   loc_TmpVertexD.UV = glm::vec2(1.0, 0.0);
 
+
+  MeshContainer.push_back(cMeshT());
+
+  MeshContainer[0].LoadModel<cOBJ_loader>("C:\\development\\resources\\cottage\\cottage_obj.obj");
+  //MeshContainer[0].LoadModel<cOBJ_loader>("C:\\development\\resources\\Saber Class\\saberncc61947.obj");
+  MeshContainer[0].CreateVBO();
+
  // iRenderer.tmp_mesh.AddQuad(loc_TmpVertexA, loc_TmpVertexB, loc_TmpVertexC, loc_TmpVertexD);
 
-  iRenderer.tmp_mesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\cottage\\TestCube01.obj");
+  //iRenderer.tmp_mesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\cottage\\cottage_obj.obj");
+  //iRenderer.tmp_mesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\cottage\\TestCube01.obj");
+  //iRenderer.tmp_mesh.LoadModel<cOBJ_loader>("C:\\development\\resources\\cottage\\TestMesh.obj");
 
-  iRenderer.tmp_mesh.CreateVBO();
+  iRenderer.AddMesh(&MeshContainer[0]);
 
 
 
