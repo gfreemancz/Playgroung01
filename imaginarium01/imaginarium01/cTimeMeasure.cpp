@@ -10,7 +10,7 @@ void cTimeMeasure::Begin(void)
 void cTimeMeasure::End(void)
 {
   QueryPerformanceCounter(&EndingTime);
-  ResultMcroseconds = EndingTime.QuadPart - StartingTime.QuadPart;
+  ResultMcroseconds = (EndingTime.QuadPart - StartingTime.QuadPart);
 }
 
 LONGLONG cTimeMeasure::Get_uSec(void)

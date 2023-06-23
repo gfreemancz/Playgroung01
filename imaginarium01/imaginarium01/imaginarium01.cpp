@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include <iostream>
+#include <fstream>
 #include <Windows.h>
 
 #ifndef SDL_h_
@@ -90,7 +91,7 @@ int main(int argc, char *argv[])
  
   
 
-   
+  std::ofstream  loc_OutputFile("log.txt");
 
    cMainApp::Init();
   
@@ -137,10 +138,13 @@ int main(int argc, char *argv[])
       loc_NewWinTitpe += std::string(" FPS :") + std::to_string(loc_FPS);
       loc_NewWinTitpe += std::string(" Frame Time :") + std::to_string(G_FrameTime);
       loc_NewWinTitpe += std::string(" app loop Time :") + std::to_string(cMainApp::RunLoopTime.Get_uSec());
+
+      loc_OutputFile << std::to_string(loc_FPS) + ";" + std::to_string(G_FrameTime) + ";" + std::to_string(cMainApp::RunLoopTime.Get_uSec()) + ";" + std::to_string(G_SwapTime.Get_uSec()) << std::endl;
       G_Wokynko->UpdateWinTitle(loc_NewWinTitpe);
 
 		}
 	}
+  loc_OutputFile.close();
 
 	nsGLI::iGlInterface.Clean(G_Wokynko);
 
