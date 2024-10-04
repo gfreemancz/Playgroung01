@@ -1,1 +1,14 @@
 JA1.gog
+*.idb
+*.suo
+*.obj
+*.tlog
+*.db
+*.exe
+*.ipch
+*.log
+*.ilk
+*.pdb
+/Fallout1_Dat_Extractor/test_data/MASTER.DAT
+*.pch
+/Fallout1_Dat_Extractor/test_data/CRITTER.DAT
